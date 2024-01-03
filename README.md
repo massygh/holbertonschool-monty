@@ -29,4 +29,4 @@ Files containing Monty byte codes usually have the .m extension. Most of the ind
 
 ## AUTHORS
 
-[Ines Oubabas](https://github.com/Ines-Oubabas/holbertonschool-monty) || [Massinissa Ghendous](https://github.com/massygh/holbertonschool-monty)
+[Ines Oubabas](https://github.com/Ines-Oubabas) || [Massinissa Ghendous](https://github.com/massygh/holbertonschool-monty)
