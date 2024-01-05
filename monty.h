@@ -1,22 +1,21 @@
-#ifndef MONTY_H
-#define MONTY_H
+#ifndef HEADER_H
+#define HEADER_H
 
-/* LIBRARIES */
-
-#include <stdio.h>
+/* Libraries */
 #include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <time.h>
 
-/* GLOBAL VARS */
+/* Global Variables */
+char **input;
 
-char *buff;
-
-/* STRUCTURES */
-
+/* Structures */
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -26,7 +25,6 @@ char *buff;
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
-
 typedef struct stack_s
 {
 	int n;
@@ -45,30 +43,19 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int);
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* PROTOTYPES */
-
-/* main functions */
-void handle(char *file);
-void (*check_opcodes(void))(stack_t **, unsigned int);
-
-/* aux functions*/
-void *_calloc(unsigned int nmemb, unsigned int size);
-char **_split(char *str, char *sep);
-int _atoi(char *str, unsigned int line_number);
-void free_stack(stack_t *head);
-
-/* handle functions */
-void push(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-
-/* print functions */
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
+/* Prototypes */
+void get_opcode(char *buff, stack_t **stack, unsigned int line_number);
+char **_divstring(char *string_pathcpy, char *separator);
+void f_pall(stack_t **stack, unsigned int line_number);
+void f_push(stack_t **stack, unsigned int line_number);
+void f_pint(stack_t **stack, unsigned int line_number);
+void f_pop(stack_t **stack, unsigned int line_number);
+void f_swap(stack_t **stack, unsigned int line_number);
+void f_add(stack_t **stack, unsigned int line_number);
+void f_nop(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t *stack);
 
 #endif
