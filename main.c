@@ -14,41 +14,65 @@ int main(int argc, char *argv[])
 	stack_t *stack = NULL;
 
 	if (argc != 2)
+	{
 		error_usage();
-	if ((file = fopen(argv[1], "r")) == NULL)
+	}
+	file = fopen(argv[1], "r");
+	if (file == NULL)
+	{
 		error_file_open(argv[1]);
+	}
 	instruction_t opcodes[] = {
-		{"pall", pall}, {"pint", pint}, {"pop", pop},
-		{"swap", swap}, {"add", add}, {"nop", nop},
-		{NULL, NULL}
+		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{"swap", swap},
+		{"add", add},
+		{"nop", nop},
+		{NULL, NULL},
 	};
-	while (getline(&line, &len, file) != -1) {
+	while (getline(&line, &len, file) != -1)
+	{
+		flag = 0;
 		line_number++;
-		if ((opcode = strtok(line, " \t$\n")) == NULL || opcode[0] == '#') 
+		opcode = strtok(line, " \t$\n");
+		if (opcode == NULL || opcode[0] == '#')
 			continue;
-	if ((flag = !strcmp(opcode, "push")))
-	{
+		if (strcmp(opcode, "push") == 0)
+		{
 			value = strtok(NULL, " $\n");
-			if (!value) print_push_error(line_number, file, line);
-			for (i = 0; value[i]; i++)
-				if (!isdigit(value[i]) && value[i] != '-')
+			if (value == NULL)
+			{
+				print_push_error(line_number, file, line);
+			}
+			for (i = 0; value[i] != '\0'; i++)
+			{
+				if  (!isdigit(value[i]) && value[i] != '-')
+				{
 					print_push_error(line_number, file, line);
-			push(&stack, atoi(value));
+				}
+			}
+		push(&stack, atoi(value));
+		flag = 1;
 		}
-	if (!flag)
-	{
-			for (j = 0; opcodes[j].opcode; j++)
-				if (!strcmp(opcode, opcodes[j].opcode))
+		if (flag == 0)
+		{
+			for (j = 0; opcodes[j].opcode != NULL; j++)
+			{
+				if (strcmp(opcode, opcodes[j].opcode) == 0)
 				{
 					opcodes[j].f(&stack, line_number);
 					break;
 				}
-			if (j == 6) invalid_inst(line_number, opcode, file, line, stack);
+			}
 		}
-		free(line);
-		line = NULL;
+		if (j == 6)
+			invalid_inst(line_number, opcode, file, line, stack);
+	free(line);
+	line = NULL;
 	}
 	free_dlistint(stack);
+	free(line);
 	fclose(file);
 	return (0);
 }
