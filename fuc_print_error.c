@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * error_usage - Prints a usage error message and exits
  */
@@ -8,7 +7,6 @@ void error_usage(void)
 	fprintf(stderr, "USAGE: monty file\n");
 	exit(EXIT_FAILURE);
 }
-
 /**
  * error_file_open - Prints an error file open failure and exits
  * @filename: The name of the file that couldn't be opened
@@ -35,7 +33,6 @@ void invalid_inst(unsigned long line_number, const char *opcode,
 	free_dlistint(stack);
 	exit(EXIT_FAILURE);
 }
-
 /**
  * print_push_error - Handles errors when encountering a 'push' instruction
  * @line_number: The line number in the script
