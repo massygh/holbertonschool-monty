@@ -1,45 +1,28 @@
 #include "monty.h"
 
 /**
-*main - Main function
-*@argc: Quantity of arguments that enters the function
-*@argv: Arguments
-*Return: Always Zero
+* main - Entry point of the program
+* @argc: Argument count (number of arguments)
+* @argv: Argument vector (array of strings passed as arguments)
+*
+* --------------- Description ---------------
+* If the user does not give any file or more than one argument
+* to your program print the error message
+*
+* Return: Always 0 if sucess or EXIT_FAILURE
 */
 
 int main(int argc, char **argv)
 {
-	FILE *fd;
-	unsigned int line_number = 0;
-	char *buff;
-	size_t size = 0;
-	stack_t *stack = NULL;
-
+	/* Error : If there are more than 2 arguments */
 	if (argc != 2)
 	{
-		dprintf(2, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
+		/* Print the error message in STDERR */
+		dprintf(STDERR_FILENO, "USAGE: monty file\n");
+		exit(EXIT_FAILURE); /* quit the program on failure */
 	}
-	fd = fopen(argv[1], "r+");
+	/* if argc == 2 then we can continue */
+	execute(argv[1]); /* handle the arguments <filename> */
 
-	if (!fd)
-	{
-		dprintf(2, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-
-	while (getline(&buff, &size, fd) != -1)
-	{
-		line_number++;
-		input = _divstring(buff, "\n\t\r ");
-		if (input)
-			get_opcode(input[0], &stack, line_number);
-
-		free(input);
-	}
-
-	free(buff);
-	free_stack(stack);
-	fclose(fd);
-	return (0);
+	return (0); /* return 0 if sucess so the program can continue */
 }
