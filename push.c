@@ -4,7 +4,7 @@
  * @stack: Pointer to the stack
  * @value: Value to be pushed onto the stack
  */
-void push(stack_t **stack, int value)
+void push(stack_t **stack, unsigned int value)
 {
 	stack_t *new_node;
 
