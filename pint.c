@@ -1,19 +1,18 @@
 #include "monty.h"
 
 /**
- * pint - function that prints the value at the top of the stack,
- * followed by a new line.
- * @stack: pointer to the header of the nodesi
- * @line_number: line number of file
- * Return: void
+ * pint - Affiche la valeur du nœud supérieur de la pile.
+ * @stack: Pointeur vers la pile
+ * @line_number: Numéro de ligne dans le script
  */
-
 void pint(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL)
-	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	printf("%d\n", (*stack)->n);
+    // Vérifie si la pile est vide
+    if (*stack == NULL)
+    {
+        fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+    // Affiche la valeur du nœud supérieur
+    printf("%d\n", (*stack)->n);
 }
