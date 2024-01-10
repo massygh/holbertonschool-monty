@@ -1,12 +1,13 @@
 #include "monty.h"
+
 /**
- *nop- Function that doesn´t do anything
- *@stack: stack struct
- *@line_number: line_number
- *Return: no return
+ * nop - Ne fait rien.
+ * @stack: Pointeur vers la pile
+ * @line_number: Numéro de ligne dans le script
  */
 void nop(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+    // Fonction qui ne fait rien
+    (void)stack;
+    (void)line_number;
 }
